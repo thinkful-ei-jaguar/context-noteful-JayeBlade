@@ -1,13 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './NotefulForm.css'
-import NotefulContext from '../Not'
 
-export default class NotefulForm extends Component {
+export default function NotefulForm (props) {
   
-  static contextType = NotefulContext;  
-  const { className, ...otherProps } = this.context
-  
-  render () {
+  const { className, ...otherProps } = props
+
     return (
       <form
         className={['Noteful-form', className].join(' ')}
@@ -15,5 +12,4 @@ export default class NotefulForm extends Component {
         {...otherProps}
       />
     )
-  }
 }

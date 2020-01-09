@@ -13,14 +13,20 @@ import NotefulContext from '../NotefulContext';
 class App extends Component {
     state = {
         notes: [],
-        folders: []
+        folders: [],
+        deleteNote: this.handleDelete,
     };
-
-    
 
     componentDidMount() {
         // fake date loading from API call
         setTimeout(() => this.setState(dummyStore), 600);
+    }
+
+    handleDelete = (noteID) => {
+        const newNotes = this.state.notes.filter(note => note.id !==  noteID)
+        this.setState({
+            notes: newNotes
+        })
     }
 
     renderNavRoutes() {
@@ -70,7 +76,8 @@ class App extends Component {
            
           <NotefulContext.Provider value = {{
             notes: this.state.notes,
-            folders: this.state.folders
+            folders: this.state.folders,
+            deleteNote: this.handleDelete,
           }}>  
             <div className="App">
                 <nav className="App__nav">{this.renderNavRoutes()}</nav>
