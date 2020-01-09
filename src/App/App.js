@@ -8,12 +8,15 @@ import NotePageMain from '../NotePageMain/NotePageMain';
 import dummyStore from '../dummy-store';
 import {getNotesForFolder, findNote, findFolder} from '../notes-helpers';
 import './App.css';
+import NotefulContext from '../NotefulContext';
 
 class App extends Component {
     state = {
         notes: [],
         folders: []
     };
+
+    
 
     componentDidMount() {
         // fake date loading from API call
@@ -91,6 +94,11 @@ class App extends Component {
 
     render() {
         return (
+           
+          <NotefulContext.Provider value = {{
+            notes: this.state.notes,
+            folders: this.state.folders
+          }}>  
             <div className="App">
                 <nav className="App__nav">{this.renderNavRoutes()}</nav>
                 <header className="App__header">
@@ -101,6 +109,8 @@ class App extends Component {
                 </header>
                 <main className="App__main">{this.renderMainRoutes()}</main>
             </div>
+          </NotefulContext.Provider>
+          
         );
     }
 }
